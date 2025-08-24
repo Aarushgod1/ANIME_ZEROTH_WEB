@@ -1,87 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ANIME_ZEROTH_WEB</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aarush | Editing Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: white;
+    }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet" />
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(90deg, #00f5ff, #8a2be2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .video-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .video-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.7);
+    }
+
+    .video-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Popup (Lightbox) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox video {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,255,255,0.7);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <nav class="navbar">
-      <h1 class="logo">ANIME_ZEROTH_WEB</h1>
-      <ul class="nav-links">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#manga">Manga Zone</a></li>
-        <li><a href="#anime">Anime Zone</a></li>
-        <li><a href="#games">Games</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    Aarush | Video Editing Portfolio
   </header>
 
-  <main>
-    <section id="home" class="section home-section">
-      <h2>Welcome to <span>Anime Zeroth</span></h2>
-      <p>Your ultimate manga and anime corner — with more coming soon!</p>
-    </section>
+  <section class="gallery">
+    <!-- Example Video Thumbnails -->
+    <div class="video-card" onclick="openLightbox('video1.mp4')">
+      <img src="thumb1.jpg" alt="Edit 1">
+    </div>
+    <div class="video-card" onclick="openLightbox('video2.mp4')">
+      <img src="thumb2.jpg" alt="Edit 2">
+    </div>
+    <div class="video-card" onclick="openLightbox('video3.mp4')">
+      <img src="thumb3.jpg" alt="Edit 3">
+    </div>
+    <!-- Add more videos by copying above block -->
+  </section>
 
-    <section id="manga" class="section manga-section">
-      <h2>Manga Zone</h2>
-      <div class="manga-grid">
-        <!-- Sample manga cards -->
-        <div class="manga-card">
-          <img src="https://i.imgur.com/8QXjq0b.jpg" alt="Naruto Manga Cover" />
-          <h3>Naruto</h3>
-        </div>
-        <div class="manga-card">
-          <img src="https://i.imgur.com/BQ1lFhM.jpg" alt="One Piece Manga Cover" />
-          <h3>One Piece</h3>
-        </div>
-        <div class="manga-card">
-          <img src="https://i.imgur.com/vItlGKw.jpg" alt="Attack on Titan Manga Cover" />
-          <h3>Attack on Titan</h3>
-        </div>
-      </div>
-    </section>
+  <!-- Popup Player -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">✖</span>
+    <video id="lightboxVideo" controls autoplay></video>
+  </div>
 
-    <section id="anime" class="section coming-soon-section">
-      <h2>Anime Zone</h2>
-      <p class="coming-soon">Coming Soon 🚀</p>
-    </section>
+  <script>
+    function openLightbox(videoSrc) {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxVideo = document.getElementById("lightboxVideo");
+      lightbox.style.display = "flex";
+      lightboxVideo.src = videoSrc;
+    }
 
-    <section id="games" class="section coming-soon-section">
-      <h2>Games</h2>
-      <p class="coming-soon">Coming Soon 🎮</p>
-    </section>
+    function closeLightbox() {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxVideo = document.getElementById("lightboxVideo");
+      lightbox.style.display = "none";
+      lightboxVideo.pause();
+      lightboxVideo.src = "";
+    }
+  </script>
 
-    <section id="about" class="section about-section">
-      <h2>About Anime Zeroth</h2>
-      <p>
-        Hey, I’m Aarush aka Anime Zeroth — your go-to guy for everything manga and anime edits!  
-        This site is just the beginning. Stay tuned for fresh content, and thanks for stopping by! 🙏
-      </p>
-    </section>
-
-    <section id="contact" class="section contact-section">
-      <h2>Contact Me</h2>
-      <p>Find me on social media or send a message:</p>
-      <div class="contact-links">
-        <a href="https://www.youtube.com/@Floricff" target="_blank" class="btn">YouTube</a>
-        <a href="https://instagram.com/anime_zeroth" target="_blank" class="btn">Instagram</a>
-        <a href="mailto:aarush@example.com" class="btn">Email Me</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 ANIME_ZEROTH_WEB. All rights reserved.</p>
-  </footer>
 </body>
 </html>
